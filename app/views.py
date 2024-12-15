@@ -141,7 +141,10 @@ def setPeerEval(document_instances):
                 evaluation_link = f"{base_url}studentEval/{document.id}/{student.uid}/"
 
                 # TODO: Fix mailing component
-                send_peer_evaluation_email(evaluation_link, email)
+                try:
+                    send_peer_evaluation_email(evaluation_link, email)
+                except:
+                    pass
                 
                 if current_assigned_count == num_peers:
                     break
