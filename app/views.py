@@ -271,6 +271,13 @@ def TAHome(request):
         return redirect('/TAHome/')
 
     # Analytics for Teacher Dashboard
+    total_marks = numberOfQuestions.objects.all().first()
+    if not total_marks:
+        total_marks = 0
+    else:
+        total_marks = total_marks.total_marks
+
+    # Analytics for Teacher Dashboard
     try:
         # Distribution of marks for students: Group by document_id and calculate average score
         marks_distribution = (
@@ -289,8 +296,6 @@ def TAHome(request):
         total_peer_evaluations = PeerEvaluation.objects.count()
         evaluated_peer_evaluations = PeerEvaluation.objects.filter(evaluated=True).count()
         pending_peer_evaluations = PeerEvaluation.objects.filter(evaluated=False).count()
-
-        num_ques = numberOfQuestions.objects.all().first().total_marks
 
         peer_evaluations = {
             'total': total_peer_evaluations,
@@ -321,6 +326,7 @@ def TAHome(request):
                 } for ticket in tickets_raised
             ]
         }
+
     except Exception as e:
         analytics_data = {
             'top_students_scores': [],  # Default empty list
@@ -333,7 +339,7 @@ def TAHome(request):
     return render(request, 'TAHome.html', {
         'users': user_profile.serialize(),
         'analytics_data': analytics_data,
-        'num_ques': num_ques,
+        'num_ques': total_marks,
     })
 
 
@@ -398,6 +404,11 @@ def TeacherHome(request):
         return redirect('/TeacherHome/')
 
     # Analytics for Teacher Dashboard
+    total_marks = numberOfQuestions.objects.all().first()
+    if not total_marks:
+        total_marks = 0
+    else:
+        total_marks = total_marks.total_marks
 
     try:
         # Distribution of marks for students: Group by document_id and calculate average score
@@ -417,8 +428,6 @@ def TeacherHome(request):
         total_peer_evaluations = PeerEvaluation.objects.count()
         evaluated_peer_evaluations = PeerEvaluation.objects.filter(evaluated=True).count()
         pending_peer_evaluations = PeerEvaluation.objects.filter(evaluated=False).count()
-
-        num_ques = numberOfQuestions.objects.all().first().total_marks
 
         peer_evaluations = {
             'total': total_peer_evaluations,
@@ -459,7 +468,7 @@ def TeacherHome(request):
     return render(request, 'TeacherHome.html', {
         'users': user_profile.serialize(),
         'analytics_data': analytics_data,
-        'num_ques': num_ques,
+        'num_ques': total_marks,
     })
 
 
@@ -723,8 +732,7 @@ def questionNumbers(request):
         number, total_marks = request.POST.get('num-questions'), request.POST.get('total_marks')
         numQue = numberOfQuestions.objects.all().first()
         if not numQue:
-            numQue = numberOfQuestions(number=number)
-            numQue = numberOfQuestions(total_marks=total_marks)
+            numQue = numberOfQuestions(number=number, total_marks=total_marks)
         else:
             numQue.number = number
             numQue.total_marks = total_marks
