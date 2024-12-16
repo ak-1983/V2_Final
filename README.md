@@ -28,9 +28,7 @@ You only need **Git** to clone the repository. Docker will handle all other depe
 
 2. **Configure Settings**
    * The Docker container will automatically handle all dependencies, including the database.
-   * However, you'll need to configure your PostgreSQL credentials:
-     - Add your PostgreSQL credentials in the `settings.py` file, specifically in the Database section (line 78).
-     - If you'd like to use your email to send notifications, configure your email settings near line 143.
+   * If you'd like to use your email to send notifications, configure your email settings near line 143.
 
 3. **Running the Application with Docker**
    The system has been Dockerized. To run the application, simply execute the following commands:
