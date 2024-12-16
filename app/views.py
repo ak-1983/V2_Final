@@ -843,7 +843,7 @@ def studentHome(request):
         own_pdf = documents.objects.filter(uid=student_profile).first()
 
         # Render the data in the studentHome template
-        return render(request, 'studentHome.html', {
+        return render(request, 'StudentHome.html', {
             'evaluation_files': evaluation_files_data,
             'own_documents': own_documents_data,
             'own_pdf': own_pdf.file.url
@@ -852,7 +852,7 @@ def studentHome(request):
     except Exception as e:
         # Handle unexpected errors
         print(f"Error fetching data: {e}")
-        return render(request, 'studentHome.html', {
+        return render(request, 'StudentHome.html', {
             'evaluation_files': [],
             'own_documents': [],
         })
