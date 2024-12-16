@@ -1,7 +1,3 @@
-Here’s the updated README with detailed installation instructions for Git and Docker on Ubuntu, macOS, and Windows:
-
----
-
 # Peer Evaluation System
 
 The **Peer Evaluation System** is a reliable and scalable solution designed to enhance the learning experience in large class sizes. This system facilitates fair and efficient assessment by leveraging peer feedback, enabling participants to evaluate each other's work under structured guidelines. The system allows teachers to track student learning outside the class without any extra workload.
@@ -159,5 +155,3 @@ For inquiries, feedback, or suggestions, feel free to:
   - rohit.24csz0014@iitrpr.ac.in
 
 --- 
-
-This README includes platform-specific instructions for installing Git and Docker, ensuring users can set up the system regardless of their operating system.
