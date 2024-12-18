@@ -499,7 +499,7 @@ def uploadFile(request):
                     user, created = User.objects.get_or_create(
                         email=data[1],
                         defaults={
-                            'username': data[1].split("@")[0],
+                            'username': data[1],
                             'first_name': data[0].split()[0],
                             'last_name': data[0].split()[1] if len(data[0].split()) > 1 else '',
                         }
@@ -560,14 +560,11 @@ def register_page(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        print(first_name, last_name, username, email, password)
-
         # Check if a user with the provided username already exists
-        user = User.objects.filter(username=username)
+        user = User.objects.filter(username=email)
         
         if user.exists():
             # Display an information message if the username is taken
@@ -586,7 +583,7 @@ def register_page(request):
         user = User.objects.create_user(
             first_name=first_name,
             last_name=last_name,
-            username=username,
+            username=email,
             email=email
         )
         
@@ -594,7 +591,7 @@ def register_page(request):
         user.set_password(password)
         user.save()
 
-        user_id = User.objects.get(username=username).id
+        user_id = User.objects.get(username=email).id
         user_profile = UserProfile(user_id=user_id, role="Student")
         user_profile.save()
         
@@ -656,9 +653,9 @@ def uploadCSV(request):
                     user, created = User.objects.get_or_create(
                         email=data[1],
                         defaults={
-                            'username': data[1].split("@")[0],
+                            'username': data[1],
                             'first_name': data[0].split()[0],
-                            'last_name': data[0].split()[1] if len(data[0].split()) > 1 else '',
+                            'last_name': data[0].split()[1] if len(data[0].split()) > 1 else ''
                         }
                     )
 
@@ -668,7 +665,7 @@ def uploadCSV(request):
                         html_message = render_to_string(
                             "ForgotPasswordMailTemplate.html",  # Path to your email template
                             {
-                                "username": data[1].split("@")[0],
+                                "username": data[1],
                                 "new_password": random_password  # Link to the evaluation
                             },
                         )
@@ -686,7 +683,7 @@ def uploadCSV(request):
                         user.set_password(random_password)
                         user.save()
 
-                        user_id = User.objects.get(username=data[1].split("@")[0]).id
+                        user_id = User.objects.get(username=data[1]).id
                         new_user_profile = UserProfile(user_id=user_id, role="Student")
                         new_user_profile.save()
 
