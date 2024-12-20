@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a_&o78gwwax&3cbbn+y&_5k()bwwaiz4=5d8sv!-n=yga%qh#&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -149,6 +149,9 @@ STATICFILES_DIR = {
 }
 MEDIA_ROOT = os.path.join(BASE_DIR, 'public/static')
 MEDIA_URL = '/media/'
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Email configuration for MailHog
 # Email configuration for Gmail
