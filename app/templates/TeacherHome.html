@@ -150,7 +150,7 @@
                             Files:</label>
                         <input type="file" id="pdf-upload" name="doc" accept=".pdf" multiple
                             class="block w-full p-2 border border-gray-300 rounded-md doc" required>
-                        <p class="text-sm text-gray-500 mt-2">You can select multiple PDF files to upload. The answersheet of students can uploaded in bulck here.</p>
+                        <p class="text-sm text-gray-500 mt-2">You can select multiple PDF files to upload. The answersheet of students can be uploaded in bulk here.</p>
                         <button id="submit-pdf"
                             class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4">Submit PDF
                             Files</button>
@@ -160,6 +160,8 @@
 
             <!-- Analytics Section -->
             <div id="analytics" class="content-section bg-white p-6 rounded-lg shadow-md mb-6">
+                <p class="text-gray-700 mb-4">This section provides the general information related to the total documents, total peer evaluations, evaluated answer sheets and the pending evaluations.
+                    The section also provide the functionality for the viewing of the marks distribution of the whole class.</p>
                 <!-- Cards Section -->
                 <div class="w-full flex flexcol gap-4">
                     <!-- Total Documents Card -->
@@ -340,7 +342,7 @@
 
             <div id="delete-data" class="content-section hidden bg-white p-6 rounded-lg shadow-md mb-6">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Delete Data</h2>
-                <p class="text-gray-700 mb-4">This button deletes will the data for the present evaluation . Use this only after the entire evaluation process is complete.</p>
+                <p class="text-gray-700 mb-4">This button will delete the data for the present evaluation. Use this only after the entire evaluation process is completed or before starting a new evaluation.</p>
                 <form action="/DeleteDocs/" method="POST">
                     {% csrf_token %}
                     <button id="delete-data-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
