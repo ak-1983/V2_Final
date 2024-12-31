@@ -90,7 +90,8 @@
             <!-- Student Section -->
            <div id="student_data" class="content-section hidden bg-white p-6 rounded-lg shadow-md mb-6">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Tickets Status</h2>
-                <p class="text-gray-700 mb-4">You can view student records here.</p>
+                <p class="text-gray-700 mb-4">This section indicates if anyone has raised tickets if they are not satisfired with their evaluation.<br>
+                You can see who evaluated, the document , outcome of evaluation and Action or the status of the ticket.</p>
 
                 <!-- Table to display student records -->
                 <div class="overflow-x-auto">
@@ -124,7 +125,7 @@
             <!-- Pre Evaluation Section -->
             <div id="upload-data" class="content-section hidden bg-white p-6 rounded-lg shadow-md mb-6">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Upload Data</h2>
-                <p class="text-gray-700 mb-4">You can upload files here:</p>
+                <p class="text-gray-700 mb-4">Here you can upload the specified data to conduct peer evaluation</p>
 
                 <!-- Upload Section for CSV File -->
                 <div class="mb-6">
@@ -134,7 +135,7 @@
                             File:</label>
                         <input type="file" id="csv-upload" name="csv-upload" accept=".csv"
                             class="block w-full p-2 border border-gray-300 rounded-md" required>
-                        <p class="text-sm text-gray-500 mt-2">Please upload a single CSV file.</p>
+                        <p class="text-sm text-gray-500 mt-2">Please upload a single CSV file, containing coloumns of name, email and UID of the students</p>
                         <button id="submit-csv"
                             class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4">Submit CSV
                             File</button>
@@ -149,7 +150,7 @@
                             Files:</label>
                         <input type="file" id="pdf-upload" name="doc" accept=".pdf" multiple
                             class="block w-full p-2 border border-gray-300 rounded-md doc" required>
-                        <p class="text-sm text-gray-500 mt-2">You can select multiple PDF files to upload.</p>
+                        <p class="text-sm text-gray-500 mt-2">You can select multiple PDF files to upload. The answersheet of students can uploaded in bulck here.</p>
                         <button id="submit-pdf"
                             class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mt-4">Submit PDF
                             Files</button>
@@ -227,7 +228,7 @@
             <!-- Role Manager Section -->
             <div id="role-manager" class="content-section hidden bg-white p-8 rounded-lg shadow-lg mb-8">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-6">Role Manager</h2>
-                <p class="text-gray-600 mb-6">Manage roles and permissions here.</p>
+                <p class="text-gray-600 mb-6">You can allocate roles to the newly added user as- Teacher, TA, Student.</p>
 
                 <!-- Form to manage roles -->
                 <form id="role-manager-form" method="POST" action="/change_role/" class="space-y-6">
@@ -279,7 +280,15 @@
                 <form method="post" action="/questionNumbers/">
                     {% csrf_token %}
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">Conduct Evaluation</h2>
-                    <p class="text-gray-700 mb-4">This is the content for the Conduct Evaluation section.</p>
+                    <p class="text-gray-700 mb-4"><b>In this section following details need to be provided:</b><br>
+                        1. The total number of questions in the examination.<br>
+                        2. Total marks for the examination.<br>
+                        3. How many evaluations you want to run. <br>
+                            Ex: k=1 evaluation means 1 paper will be check only once.<br>
+                                &nbsp &nbsp&nbsp k=3 evaluation means 1 paper will be checked 3 times by 3 peers<br>
+                            More value for K means more evaluation time and each student getting more number of papers to evaluate<br>
+                            But provides a better mean<br>
+                            Please make sure value of k is less than number of students. </p>
 
                     <!-- Number of Questions Input -->
                     <div class="mb-4">
@@ -319,7 +328,7 @@
             <!-- Reminder Mail Section -->
             <div id="reminder-mail" class="content-section hidden bg-white p-6 rounded-lg shadow-md mb-6">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Reminder Mail</h2>
-                <p class="text-gray-700 mb-4">You can manage reminder mail tasks here.</p>
+                <p class="text-gray-700 mb-4">Through this button you can send reminder to the students who have not yet completed the evaluation.</p>
                 <form action="/send_email/" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
@@ -331,7 +340,7 @@
 
             <div id="delete-data" class="content-section hidden bg-white p-6 rounded-lg shadow-md mb-6">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Delete Data</h2>
-                <p class="text-gray-700 mb-4">You can manage data deletion tasks here.</p>
+                <p class="text-gray-700 mb-4">This button deletes will the data for the present evaluation . Use this only after the entire evaluation process is complete.</p>
                 <form action="/DeleteDocs/" method="POST">
                     {% csrf_token %}
                     <button id="delete-data-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
