@@ -1162,6 +1162,7 @@ def export_evaluations_to_csv(request):
     with open('evaluations.xlsx', 'rb') as f:
         response = HttpResponse(f.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename=evaluations.xlsx'
+        os.remove('evaluations.xlsx')
 
     return response
 
