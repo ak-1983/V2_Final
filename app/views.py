@@ -922,11 +922,11 @@ def studentEval(request, doc_id, eval_id):
         messages.error(request, 'Permission denied.')
         return redirect('/logout/')
     
-    if user_profile.role != 'Student':
-        pass
-    elif evaluation.evaluated:
-        messages.error(request, 'This document has already been evaluated.')
-        return redirect(f'/{user_profile.role}Home/')
+    # if user_profile.role != 'Student':
+    #     pass
+    # elif evaluation.evaluated:
+    #     messages.error(request, 'This document has already been evaluated.')
+    #     return redirect(f'/{user_profile.role}Home/')
 
     # Fetch the number of questions
     number_of_questions = numberOfQuestions.objects.all().last()
