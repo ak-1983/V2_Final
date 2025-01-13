@@ -1,9 +1,10 @@
 from pdf2image import convert_from_bytes
-from PIL import Image
+from PIL import Image  # Ensure this import is used
 import pytesseract
 import io
 import re
 from django.core.files.uploadedfile import InMemoryUploadedFile
+import os
 
 def is_number(s):
     try:
@@ -22,6 +23,7 @@ def crop_top_left(image, crop_width, crop_height):
 def process_uploaded_pdf(uploaded_file):
     try:
         # Convert the uploaded PDF to an image
+        uploaded_file.seek(0)
         pdf_bytes = uploaded_file.read()
         images = convert_from_bytes(pdf_bytes, first_page=1, last_page=1)
 
@@ -30,8 +32,8 @@ def process_uploaded_pdf(uploaded_file):
 
         # Process the first page
         image = images[0]
-        crop_width = int(image.width * 0.2)
-        crop_height = int(image.height * 0.1)
+        crop_width = int(image.width * 0.3)
+        crop_height = int(image.height * 0.15)
 
         # Crop the top-left corner
         cropped_image = crop_top_left(image, crop_width, crop_height)
@@ -42,9 +44,9 @@ def process_uploaded_pdf(uploaded_file):
         # Extract a number from the OCR text
         extracted_number = re.search(r'\b\d{3}\b', recognised_text)
         if not extracted_number:
-            raise Exception("No number found in OCR output")
-
-        number = extracted_number.group()
+            number = str(uploaded_file.name).split(".")[0]
+        else:
+            number = extracted_number.group()
 
         # Rename the PDF in-memory
         new_pdf_filename = f"{number}.pdf"
@@ -65,3 +67,15 @@ def process_uploaded_pdf(uploaded_file):
     except Exception as e:
         print(f"Error processing uploaded PDF: {e}")
         raise
+
+def get_pdf_from_current_directory(filename):
+    current_directory = os.path.dirname(__file__)
+    file_path = os.path.join(current_directory, filename)
+    return open(file_path, 'rb')
+
+# Example usage
+if __name__ == "__main__":
+    pdf_file = get_pdf_from_current_directory("Adobe Scan Jan 13, 2025 (1).pdf")
+    number, renamed_file = process_uploaded_pdf(pdf_file)
+    print(f"Extracted number: {number}")
+    print(f"Renamed file: {renamed_file.name}")
