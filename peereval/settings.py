@@ -24,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a_&o78gwwax&3cbbn+y&_5k()bwwaiz4=5d8sv!-n=yga%qh#&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 
 # Application definition
@@ -167,9 +169,9 @@ CSRF_COOKIE_SECURE = True
 
 # Email configuration for Gmail
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "localhost"  # MailHog SMTP server
-EMAIL_PORT = 1025         # MailHog SMTP port
-EMAIL_USE_TLS = False     # No TLS for MailHog
-EMAIL_HOST_USER = ""      # No user for MailHog
-EMAIL_HOST_PASSWORD = ""  # No password for MailHog
+EMAIL_HOST = "smtp.gmail.com"  # Gmail SMTP server
+EMAIL_PORT = 587               # TLS port
+EMAIL_USE_TLS = True           # Use TLS for secure connection
+EMAIL_HOST_USER = "aivs-coordinator@iitrpr.ac.in"  # Replace with your Gmail address
+EMAIL_HOST_PASSWORD = "wygr ualf pfsv ksmh"     # Replace with your Gmail password
 DEFAULT_FROM_EMAIL = "aivs-coordinator@iitrpr.ac.in"
